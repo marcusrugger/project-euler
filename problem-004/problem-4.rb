@@ -15,7 +15,7 @@ end
 max_palindrome = 0
 
 for a in 100..999
-  for b in 100..999
+  for b in a..999
     number = a * b
     if (palindrome?(number))
       max_palindrome = number if number > max_palindrome
