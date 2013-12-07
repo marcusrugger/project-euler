@@ -16,7 +16,7 @@ bool is_prime(int number)
 
 int main(void)
 {
-  int prime_countdown = 2000000 - 2;
+  int prime_countdown = 10001 - 2;
   int last_prime = 3;
 
   while (prime_countdown > 0)

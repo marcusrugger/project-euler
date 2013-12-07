@@ -69,7 +69,7 @@ private:
 
 int main(void)
 {
-  int prime = Primes::CalculatePrime(2000000);
+  int prime = Primes::CalculatePrime(10001);
   printf("%d\n", prime);
   return 0;
 }
