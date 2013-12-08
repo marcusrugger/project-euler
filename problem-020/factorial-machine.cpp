@@ -59,7 +59,7 @@ public:
     // Find first non-zero digit
     for (x = MAX_DIGITS - 1; x >= 0 && accumulator[x] == 0; x--);
 
-    for (; x >=0; x--)
+    for (; x >= 0; x--)
       printf("%c", accumulator[x] + '0');
 
     printf("\n");
@@ -72,7 +72,7 @@ int main(void)
 {
   LargeNumber accumulator;
 
-  for (int x = 2; x < 100; x++)
+  for (int x = 2; x <= 100; x++)
   {
     accumulator.multiply_by(x);
   }
