@@ -1,5 +1,5 @@
 
-triangle =
+$original_triangle =
 [
   [ 75 ],
   [ 95, 64 ],
@@ -17,3 +17,31 @@ triangle =
   [ 63, 66,  4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31 ],
   [  4, 62, 98, 27, 23,  9, 70, 98, 73, 93, 38, 53, 60,  4, 23 ]
 ]
+
+MAX_ROWS = 15
+MAX_ROW = MAX_ROWS - 1
+
+
+def calculate_paths
+  new_triangle = $original_triangle
+
+  MAX_ROW.downto(0) do |row|
+    for col in 0..row
+      if (row == MAX_ROW)
+        new_triangle[row][col] = $original_triangle[row][col]
+      else
+        a = new_triangle[row + 1][col]
+        b = new_triangle[row + 1][col + 1]
+        c = a > b ? a : b
+        new_triangle[row][col] = $original_triangle[row][col] + c
+      end
+    end
+  end
+
+  return new_triangle[0][0]
+end
+
+
+max_path = calculate_paths
+
+puts max_path
