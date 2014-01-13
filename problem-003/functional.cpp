@@ -6,6 +6,8 @@
 /* WARNING:
  * This must be compiled with compiler optimizations that flatten the recursion.
  *
+ * ie.: g++ -O3 -o functional functional.cpp
+ *
  */
 
 

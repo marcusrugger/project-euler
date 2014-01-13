@@ -40,6 +40,8 @@ public:
   }
 
 
+private:
+
   int max_consecutive_primes(int n)
   {
     int most_consecutive = 0;
@@ -52,10 +54,6 @@ public:
     }
 
     return most_consecutive;
-
-#if 0
-    return consecutive_primes(n, 0);
-#endif
   }
 
 
