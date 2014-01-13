@@ -52,14 +52,14 @@ public:
 };
 
 
-typedef long long int number_type;
+typedef long long int number;
 
 int main(int argc, char **argv)
 {
-  Enumerator<number_type> sum_it(1, 100, 1);
-  const number_type sum = sum_it.foreach(0, [](number_type x, number_type val) { return val + x; });
-  const number_type sum_of_squares = sum_it.foreach(0, [](number_type x, number_type val) { return val + x*x; });
-  const number_type square_of_sums = sum*sum;
+  Enumerator<number> sum_it(1, 100, 1);
+  const number sum = sum_it.foreach(0, [](number x, number val) { return val + x; });
+  const number sum_of_squares = sum_it.foreach(0, [](number x, number val) { return val + x*x; });
+  const number square_of_sums = sum*sum;
 
   std::cout << "Sum of squares: " << sum_of_squares << ", Square of sums: " << square_of_sums << std::endl;
   std::cout << "Difference: " << (square_of_sums - sum_of_squares) << std::endl; 
