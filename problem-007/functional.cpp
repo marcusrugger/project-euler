@@ -4,18 +4,18 @@
 #include <stdexcept>
 
 
-typedef int prime;
-typedef std::vector<prime> list_of_primes;
+typedef int number;
+typedef std::vector<number> list_of_primes;
 
 
 class FindPrimes
 {
 private:
 
-  const prime _max_number_of_primes;
+  const number _max_number_of_primes;
 
 
-  bool is_prime(const list_of_primes &primes, prime candidate, int idx, prime max_root) const
+  bool is_prime(const list_of_primes &primes, number candidate, int idx, number max_root) const
   {
     if (idx < primes.size())
     {
@@ -34,11 +34,11 @@ private:
   }
 
 
-  list_of_primes find_primes(const list_of_primes primes, const prime start) const
+  list_of_primes find_primes(const list_of_primes &primes, const number start) const
   {
     if (primes.size() < _max_number_of_primes)
     {
-      if (is_prime(primes, start, 1, (prime) (sqrt((double) start) + 0.5)))
+      if (is_prime(primes, start, 1, (number) (sqrt((double) start) + 0.5)))
       {
         list_of_primes new_list = primes;
         new_list.push_back(start);
@@ -74,5 +74,5 @@ int main(void)
   FindPrimes find_primes(10001);
   list_of_primes primes = find_primes();
   std::cout << "Number of primes: " << primes.size() << std::endl;
-  std::cout << "10001st prime:    " << primes.back() << std::endl;
+  std::cout << "10001st number:   " << primes.back() << std::endl;
 }
