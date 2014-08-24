@@ -36,14 +36,14 @@ public:
 };
 
 
-template <class T> class IndexIterator;
+template <typename T> class Enumerator;
 
-template <class T>
+template <typename T>
 using foreach_fn = std::function<const T(const T, const T)>;
 
 
-template <class T>
-class IndexIterator
+template <typename T>
+class Enumerator
 {
 private:
 
@@ -53,7 +53,7 @@ private:
 
 public:
 
-  IndexIterator(T start, T end, T step)
+  Enumerator(T start, T end, T step)
   : _current(start), _end(end), _step(step)
   {}
 
@@ -63,17 +63,15 @@ public:
   bool is_more(void) const
   { return _current+_step <= _end; }
 
-  IndexIterator next(void) const
-  { return IndexIterator(_current+_step, _end, _step); }
+  Enumerator next(void) const
+  { return Enumerator(_current+_step, _end, _step); }
 
   T foreach(T val, foreach_fn<T> fn) const
   {
-    const T new_val = fn((*this)(), val);
-
     if (is_more())
-      return next().foreach(new_val, fn);
+      return next().foreach(fn((*this)(), val), fn);
     else
-      return new_val;
+      return fn((*this)(), val);
   }
 
 };
@@ -86,18 +84,18 @@ std::string to_string(bool flag)
 int main(int argc, char **argv)
 {
   {
-    IndexIterator<int> sum_it(1, 99, 1);
+    Enumerator<int> sum_it(1, 99, 1);
     const int sum = sum_it.foreach(0, [](int x, int val) { return val + x; });
 
     std::cout << "Sum: " << sum << std::endl;
   }
 
   {
-    IndexIterator<int> it_x(100, 999, 1);
+    Enumerator<int> it_x(100, 999, 1);
 
     const int result = it_x.foreach(0, [](int x, int val)
     {
-      IndexIterator<int> it_y(100, 999, 1);
+      Enumerator<int> it_y(100, 999, 1);
 
       return it_y.foreach(val, [x](int y, int val)
       {

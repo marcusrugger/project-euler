@@ -13,8 +13,8 @@
 
 template <typename T> class Enumerator;
 
-template <typename T>
-using foreach_fn = std::function<const T(const T, const T)>;
+template <typename T, typename U = T>
+using foreach_fn = std::function<U(const T, const U)>;
 
 
 template <typename T>
@@ -41,7 +41,8 @@ public:
   Enumerator next(void) const
   { return Enumerator(_current+_step, _end, _step); }
 
-  T foreach(T val, foreach_fn<T> fn) const
+  template<typename U>
+  U foreach(U val, std::function<U(T,U)> fn) const
   {
     if (is_more())
       return next().foreach(fn((*this)(), val), fn);
@@ -57,8 +58,9 @@ typedef long long int number;
 int main(int argc, char **argv)
 {
   Enumerator<number> sum_it(1, 100, 1);
-  const number sum = sum_it.foreach(0, [](number x, number val) { return val + x; });
-  const number sum_of_squares = sum_it.foreach(0, [](number x, number val) { return val + x*x; });
+  const number zero = 0;
+  const number sum = sum_it.foreach<number>(zero, [](number x, number val) -> number { return val + x; });
+  const number sum_of_squares = sum_it.foreach<number>(0, [](number x, number val) -> number { return val + x*x; });
   const number square_of_sums = sum*sum;
 
   std::cout << "Sum of squares: " << sum_of_squares << ", Square of sums: " << square_of_sums << std::endl;
