@@ -10,7 +10,8 @@ int evaluate_path(int cv_index, int sum)
   else if (sum + coin_values[cv_index] == TARGET_VALUE)
     return 1;
   else
-    return evaluate_path(cv_index, sum + coin_values[cv_index]) + evaluate_path(cv_index + 1, sum);
+    return evaluate_path(cv_index, sum + coin_values[cv_index]) +
+           evaluate_path(cv_index + 1, sum);
 }
 
 int main(int argc, char **argv)
