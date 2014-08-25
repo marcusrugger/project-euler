@@ -114,9 +114,9 @@ int main(int argc, char **argv)
       int s = pa + pb;
       int d = pb - pa;
 
-      if (PentagonalNumber::is_pentagonal_number(s) &&
-          PentagonalNumber::is_pentagonal_number(d) &&
-          d < lowest_d)
+      if (d < lowest_d &&
+          PentagonalNumber::is_pentagonal_number(s) &&
+          PentagonalNumber::is_pentagonal_number(d))
       {
         lowest_d = d;
       }
