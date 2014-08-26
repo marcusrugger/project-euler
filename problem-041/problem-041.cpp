@@ -24,9 +24,29 @@ void print_pandigital(void)
 
 void swap(int digit)
 {
-  int t = pandigital[digit];
-  pandigital[digit] = pandigital[digit-1];
-  pandigital[digit-1] = t;
+  if (digit <= 0)
+  {
+    printf("digit less than zero.\n");
+    throw "bullshit";
+  }
+  else if (digit >= number_of_digits)
+  {
+    printf("digit greater than the number of digits: %d.\n", digit);
+    throw "bullshit";
+  }
+  else
+  {
+    int t = pandigital[digit];
+    pandigital[digit] = pandigital[digit-1];
+    pandigital[digit-1] = t;
+  }
+#if 0
+  {
+    int t = pandigital[digit];
+    pandigital[digit] = pandigital[digit+1];
+    pandigital[digit+1] = t;
+  }
+#endif
 }
 
 
@@ -42,29 +62,23 @@ void doit()
 
   counter++;
 
-  if (is_prime(pd) && pd > largest_prime)
+  if (pd > largest_prime && is_prime(pd))
     largest_prime = pd;
 }
 
 
 void flip_em(int digit)
 {
-  if (digit == 0)
-  {
-    doit();
-    return;
-  }
-
-  for (int a = digit; a > 0; a--)
+  if (digit)
   {
     flip_em(digit-1);
-    swap(digit);
-
-    if (digit == 3)
-      printf("\n");
+    for (int a = 0; a < digit; a++)
+    {
+      swap(digit);
+      doit();
+      flip_em(digit-1);
+    }
   }
-
-  flip_em(digit-1);
 }
 
 
@@ -73,6 +87,7 @@ int main(int argc, char **argv)
   for (int a = 0; a < number_of_digits; a++)
     pandigital[a] = a+1;
 
+  doit();
   flip_em(number_of_digits - 1);
 
   printf("counter: %d\n", counter);
