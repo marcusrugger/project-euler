@@ -2,15 +2,16 @@
 exec scala "$0" "$@"
 !#
 
-object HelloWorld
+object Problem31
 {
+  val target_value = 200
   val coin_values = Array(1, 2, 5, 10, 20, 50, 100, 200)
 
   def evaluate_path(value: Int, index: Int): Int =
   {
-    if (index == coin_values.length || value > 200)
+    if (index == coin_values.length || value > target_value)
       return 0
-    else if (value + coin_values(index) == 200)
+    else if (value + coin_values(index) == target_value)
       return 1
     else
       return evaluate_path(value+coin_values(index), index) +
@@ -19,8 +20,8 @@ object HelloWorld
 
   def main(args: Array[String])
   {
-    println("Hello, world!", evaluate_path(0, 0))
+    println(evaluate_path(0, 0))
   }
 }
 
-HelloWorld.main(args)
+Problem31.main(args)
