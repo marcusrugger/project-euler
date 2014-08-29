@@ -1,12 +1,12 @@
 #include <iostream>
 
 
-int sum_idx(int idx, int step, int end, int sum)
+int sum_idx(int i, int step, int end)
 {
-  if (idx < end)
-    return sum_idx(idx+step, step, end, sum+idx);
+  if (i < end)
+    return sum_idx(i+step, step, end) + i;
   else
-    return sum;
+    return 0;
 }
 
 
@@ -14,9 +14,9 @@ int main(int argc, char **argv)
 {
   const int end     = 1000;
 
-  const int sum_3   = sum_idx(0, 3, end, 0);
-  const int sum_5   = sum_idx(0, 5, end, 0);
-  const int sum_15  = sum_idx(0, 15, end, 0);
+  const int sum_3   = sum_idx(0, 3, end);
+  const int sum_5   = sum_idx(0, 5, end);
+  const int sum_15  = sum_idx(0, 15, end);
   const int total   = sum_3 + sum_5 - sum_15;
 
   std::cout << "Sum: " << total << std::endl;
